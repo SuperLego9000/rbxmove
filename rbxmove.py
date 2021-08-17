@@ -1,6 +1,5 @@
 import asyncio,threading,random, time, pyautogui,os,keyboard
 from datetime import datetime as dt
-from asyncio.tasks import wait
 IKnowWhatImDoing = False
 if IKnowWhatImDoing == False:
     if os.name != 'nt':  # check for windows 10
@@ -212,12 +211,10 @@ class game:
         trys to rejoin the game\n
         delay is converted into milliseconds
         """
-        leave()
+        game.leave()
         for i in range(5):
-            try:
-                game.play()
-            except:
-                pass
+            press('enter')
+            time.sleep(0.1)
 
     def reset(lastchat:str=None,delay:float=0.01):
         """
@@ -235,13 +232,6 @@ class game:
         pyautogui.press('r')
         time.sleep(delay)
         pyautogui.press('enter')
-
-    def play(delay:float=0.001):
-        """
-        clicks the play button
-        """
-        time.sleep(delay)
-        pyautogui.click(pyautogui.locateOnScreen('play.png'))
 
 def waitfor(waitfor:bool,interval:float=0.2):
     """
@@ -293,8 +283,11 @@ class hotkey:
         keyboard.remove_all_hotkeys()
 
 def keepalive():
+    """
+    waits until the end of time
+    """
     while True:
-        donothing()
+        time.sleep(9^99)
 
 if buildtest:
     print("rxbmove.status> built at "+ str(dt.now()))
