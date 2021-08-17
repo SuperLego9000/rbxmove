@@ -237,6 +237,9 @@ class game:
         pyautogui.press('enter')
 
     def play(delay:float=0.001):
+        """
+        clicks the play button
+        """
         time.sleep(delay)
         pyautogui.click(pyautogui.locateOnScreen('play.png'))
 
