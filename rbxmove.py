@@ -272,7 +272,6 @@ class hotkey:
         """
         Makes a new global hotkey\n
         hotkey.new('alt+x',func1) makes alt+x run func1\n
-        hotkey.new('alt'+'x',func1) makes pressing alt then x run func1\n
         must use keepalive() or some other method of preventing main thread from closing
         """
         keyboard.add_hotkey(input, lambda: does(args))
