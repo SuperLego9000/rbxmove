@@ -188,49 +188,57 @@ def donothing():
     """
     pass
 
-def leave(lastchat:str=None,delay:float=0.01):
-    """
-    leaves the game and optionaly says some goodbyes
-    
-    there is a chance that roblox currently could have a bug where the menu doesn\'t reconize rbxmove trying to leave,
-    \nif that is the case; change the delay higher,\n
-    switch from windows store version to web version or vice versa,\n
-    or don\'t use this function, sorry for the inconvenience
-    """
-    if lastchat!=None:
-        chat(message=lastchat)
-    pyautogui.press('esc')
-    time.sleep(delay)
-    pyautogui.press('l')
-    time.sleep(delay)
-    pyautogui.press('enter')
-def rejoin(delay:float=5):
-    """
-    trys to rejoin the game\n
-    delay is converted into milliseconds
-    """
-    leave()
-   #time.sleep(delay)
-    for i in range(5):
-        press('enter')
-        time.sleep(.1)
 
-def reset(lastchat:str=None,delay:float=0.01):
-    """
-    resets and optionaly says some last words
-    
-    there is a chance that roblox currently could have a bug where the menu doesn\'t reconize rbxmove trying to reset,
-    \nif that is the case; change the delay higher,\n
-    switch from windows store version to web version or vice versa,\n
-    or don\'t use this function, sorry for the inconvenience
-    """
-    if lastchat!=None:
-        chat(message=lastchat)
-    pyautogui.press('esc')
-    time.sleep(delay)
-    pyautogui.press('r')
-    time.sleep(delay)
-    pyautogui.press('enter')
+class game:
+    def leave(lastchat:str=None,delay:float=0.01):
+        """
+        leaves the game and optionaly says some goodbyes
+        
+        there is a chance that roblox currently could have a bug where the menu doesn\'t reconize rbxmove trying to leave,
+        \nif that is the case; change the delay higher,\n
+        switch from windows store version to web version or vice versa,\n
+        or don\'t use this function, sorry for the inconvenience
+        """
+        if lastchat!=None:
+            chat(message=lastchat)
+        pyautogui.press('esc')
+        time.sleep(delay)
+        pyautogui.press('l')
+        time.sleep(delay)
+        pyautogui.press('enter')
+
+    def rejoin(delay:float=5):
+        """
+        trys to rejoin the game\n
+        delay is converted into milliseconds
+        """
+        leave()
+        for i in range(5):
+            try:
+                game.play()
+            except:
+                pass
+
+    def reset(lastchat:str=None,delay:float=0.01):
+        """
+        resets and optionaly says some last words
+        
+        there is a chance that roblox currently could have a bug where the menu doesn\'t reconize rbxmove trying to reset,
+        \nif that is the case; change the delay higher,\n
+        switch from windows store version to web version or vice versa,\n
+        or don\'t use this function, sorry for the inconvenience
+        """
+        if lastchat!=None:
+            chat(message=lastchat)
+        pyautogui.press('esc')
+        time.sleep(delay)
+        pyautogui.press('r')
+        time.sleep(delay)
+        pyautogui.press('enter')
+
+    def play(delay:float=0.001):
+        time.sleep(delay)
+        pyautogui.click(pyautogui.locateOnScreen('play.png'))
 
 def waitfor(waitfor:bool,interval:float=0.2):
     """
