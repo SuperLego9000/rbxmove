@@ -1,4 +1,4 @@
-import asyncio,threading,random, time, pyautogui,os,keyboard
+import asyncio,threading,random, time, pyautogui,os,keyboard,operator
 from datetime import datetime as dt
 IKnowWhatImDoing = False
 if IKnowWhatImDoing == False:
@@ -249,11 +249,6 @@ async def __1__(args):
         """
         if type(args)!=list:
             raise TypeError("args is not a list")
-        if(wait):
-            try:
-                await asyncio.gather(*args)
-            except TypeError:
-                pass
 
 def cw(string:str):
     """
@@ -287,6 +282,30 @@ def keepalive():
     """
     while True:
         time.sleep(9^99)
+
+RunBool=False
+class center:
+    ToggleButton='alt+c'
+    RunBool=False
+    def Toggle():
+        global RunBool
+        T = threading.Thread(target=center.Func)
+        RunBool=operator.not_(RunBool)
+        if RunBool:
+            T.start()
+    def Func():
+        while RunBool:
+            x,y=pyautogui.size()
+            x,y=x/2,y/2
+            try:
+                pyautogui.moveTo(x,y)
+            except:
+                time.sleep(10)
+    def start(ToggleButton:str='alt+c'):
+        """
+        use this function to initialize center
+        """
+        keyboard.add_hotkey(ToggleButton, lambda:center.Toggle())
 
 if buildtest:
     print("rxbmove.status> built at "+ str(dt.now()))
