@@ -263,18 +263,29 @@ class hotkey:
     """
     all hotkey functions in rbxmove
     """
-    def new(input:str,does,args=None):
+    def new(input:str,does,arg1=None,arg2=None,arg3=None,arg4=None,arg5=None):
         """
         Makes a new global hotkey\n
         hotkey.new('alt+x',func1) makes alt+x run func1\n
         must use keepalive() or some other method of preventing main thread from closing
         """
-        keyboard.add_hotkey(input, lambda: does(args))
-    def remove_all():
+        if arg1==None:
+            keyboard.add_hotkey(input, lambda: does())
+        elif arg2==None:
+            keyboard.add_hotkey(input, lambda: does(arg1))
+        elif arg3==None:
+            keyboard.add_hotkey(input, lambda: does(arg1,arg2))
+        elif arg4==None:
+            keyboard.add_hotkey(input, lambda: does(arg1,arg2,arg3))
+        elif arg5==None:
+            keyboard.add_hotkey(input, lambda: does(arg1,arg2,arg3,arg4))
+        else:
+            keyboard.add_hotkey(input, lambda: does(arg1,arg2,arg3,arg4,arg5))
+    def remove(input:str):
         """
-        unregisters all hotkeys
+        removes the hotkey bound to input
         """
-        keyboard.remove_all_hotkeys()
+        keyboard.remove_hotkey(input)
 
 def keepalive():
     """
@@ -285,15 +296,17 @@ def keepalive():
 
 RunBool=False
 class center:
-    ToggleButton='alt+c'
     RunBool=False
-    def Toggle():
+    def toggle():
+        """
+        use this in rbxmove.hotkey.new to toggle mouse centering
+        """
         global RunBool
-        T = threading.Thread(target=center.Func)
+        T = threading.Thread(target=center.center)
         RunBool=operator.not_(RunBool)
         if RunBool:
             T.start()
-    def Func():
+    def center():
         while RunBool:
             x,y=pyautogui.size()
             x,y=x/2,y/2
@@ -301,11 +314,6 @@ class center:
                 pyautogui.moveTo(x,y)
             except:
                 time.sleep(10)
-    def start(ToggleButton:str='alt+c'):
-        """
-        use this function to initialize center
-        """
-        keyboard.add_hotkey(ToggleButton, lambda:center.Toggle())
 
 if buildtest:
     print("rxbmove.status> built at "+ str(dt.now()))
