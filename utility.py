@@ -12,3 +12,5 @@ if game=="PF":
     rx.hotkey.new('u+r', rx.press,('F5'))
     rx.hotkey.new('z',rx.press,'c',0.01,2,0)
 rx.keepalive()
+
+#Cool
