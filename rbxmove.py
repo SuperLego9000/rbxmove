@@ -1,5 +1,4 @@
-import asyncio,threading,random, time, pyautogui,os,keyboard,operator
-from datetime import datetime as dt
+import os
 IKnowWhatImDoing = False
 if IKnowWhatImDoing == False:
     if os.name != 'nt':  # check for windows 10
@@ -8,8 +7,23 @@ if IKnowWhatImDoing == False:
             raise OSError("OS is not windows")
         else:
             print("please use windows 10")
+#attempt to import non-standard libraries   [
+try:
+    import pyautogui
+except:
+    print("pyautogui not found!\nImporting...")
+    os.system("pip install pyautogui --no-input -q -q")
+try:
+    import keyboard
+except:
+    print("keyboard not found!\nImporting...")
+    os.system("pip install keyboard --no-input -q -q")
+#   ]
+import asyncio,threading,time,operator
+from datetime import datetime as dt
 
-buildtest = True
+
+buildtest = True #CHANGE IN PIP BUILD
 
 
 class Async:#all of my Async functions
